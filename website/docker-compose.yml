@@ -52,7 +52,7 @@ services:
     volumes:
       - certbot-etc:/etc/letsencrypt
       - wordpress:/var/www/html
-    command: certonly --webroot --webroot-path=/var/www/html --email admin@milansswimschool.com --agree-tos --no-eff-email --staging -d milansswimschool.com -d www.milansswimschool.com
+    command: certonly --webroot --webroot-path=/var/www/html --email admin@DOMAIN_NAME --agree-tos --no-eff-email --staging -d DOMAIN_NAME -d www.DOMAIN_NAME
 
 volumes:
   certbot-etc:
