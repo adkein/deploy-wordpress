@@ -1,0 +1,55 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: Copy website materials to remote
+      ansible.builtin.copy:
+        src: /Users/gazda/pj/docker-compose-wordpress/website
+        dest: '/home/{{ sudo_user }}'
+
+    - name: Install ca-certificates
+      ansible.builtin.apt:
+        name: ca-certificates
+        state: present
+
+    - name: Install curl
+      ansible.builtin.apt:
+        name: curl
+        state: present
+
+    - name: Install keyrings
+      ansible.builtin.command: install -m 0755 -d /etc/apt/keyrings
+
+    - name: Download docker keyrings
+      ansible.builtin.command: curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+
+    - name: Chmod docker keyrings
+      ansible.builtin.command: chmod a+r /etc/apt/keyrings/docker.asc
+
+    - name: Add the repository to Apt source
+      ansible.builtin.shell: echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    - name: Install docker
+      ansible.builtin.apt:
+        name: docker-ce
+        state: present
+        update_cache: yes
+
+    - name: Install docker
+      ansible.builtin.apt:
+        name: docker-ce-cli
+        state: present
+
+    - name: Install docker
+      ansible.builtin.apt:
+        name: containerd.io
+        state: present
+
+    - name: Install docker
+      ansible.builtin.apt:
+        name: docker-buildx-plugin
+        state: present
+
+    - name: Install docker
+      ansible.builtin.apt:
+        name: docker-compose-plugin
+        state: present
