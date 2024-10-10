@@ -9,6 +9,8 @@ that runs on the remote server could be put into its own Ansible playbook, but s
 particularly time-consuming and, when it is, it requires troubleshooting it at the command line anyway, so I
 haven't put that into a playbook yet.
 
+The steps I followed are outlined in [this doc](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-docker-compose).
+
 ## Installation
 
 I assume you have a remote server already deployed running Ubuntu. I have tested this with Ubuntu 20.04.
